@@ -1,87 +1,674 @@
 [
-{
-  "id":400,
-  "name":"გოგიტა ქავთარაძე",
-  "rels":[
-  {
-    "name":"მარიამ "
-  }
-  ]
-  
-},
   {
     "id": 300,
-    "parentId":400,
-    "name": "ჯემალ ქავთარაძე",
+    "name": "ფარსადანი",
     "rels": [
       {
-        "name": "ნანი გაფრინდაშვილი"
+        "name": "გეწაძე (ს. სვირიდან)"
       }
     ]
   },
   {
     "id": 200,
     "parentId": 300,
-    "name": "გიორგი ქავთარაძე",
+    "name": "ლუკა ზიბზიბაძე",
     "rels": [
       {
-        "name": "მაია არველაძე"
+        "name": "ეკატერინე ნებიერიძე"
       }
     ]
   },
   {
     "id": 201,
     "parentId": 300,
-    "name": "ლევან ქავთარაძე",
+    "name": "რაჟდენი ზიბზიბაძე",
     "rels": [
       {
-        "name": "ლელა უჩიძე"
+        "name": "პიღასი"
       }
     ]
   },
-    {
+  {
+    "id": 202,
+    "parentId": 300,
+    "name": "ქალიშვილი",
+    "isFemale": true,
+    "rels": [
+      {
+        "name": "ჯაფარიძე (ს. შორაპანში)"
+      }
+    ]
+  },
+  {
+    "id": 203,
+    "parentId": 300,
+    "name": "ქალიშვილი",
+    "isFemale": true,
+    "rels": [
+      {
+        "name": "ბუსკივაძე (ს. ღვანკითში)"
+      }
+    ]
+  },
+  {
     "id": 1,
     "parentId": 200,
-    "name": "საბა ქავთარაძე",
+    "name": "ეზეკია ზიბზიბაძე",
     "rels": [
       {
-        "name": ""
+        "name": "ელენა მუმლაძე"
       }
     ]
   },
   {
-    "id":2,
-    "parentId":200,
-    "name":"გოგიტა ქავთარაძე",
-    "rels":[
-      {
-        "name":"მეგი ფაჩულია"
-      }
-
-    ]
-
-  },
-  {
-    "id": 20,
-    "parentId": 201,
-    "name":"ჯემალ ქავთარაძე",
+    "id": 2,
+    "parentId": 1,
+    "name": "რეზო ზიბზიბაძე",
     "rels": [
       {
-        "name": ""
+        "name": "ლიანა"
       }
     ]
   },
   {
-    "id":30,
-    "parentId":201,
+    "id": 3,
+    "parentId": 1,
+    "name": "შოთა ზიბზიბაძე",
+    "rels": [
+      {
+        "name": "მარიკო"
+      }
+    ]
+  },
+  {
+    "id": 4,
+    "parentId": 1,
+    "name": "ვაჟა ზიბზიბაძე",
+    "rels": [
+      {
+        "name": "ფაციკო ჩიკვატია"
+      },
+      {
+        "name": "ჟუჟუნა ირემაშვილი"
+      }
+    ]
+  },
+  {
+    "id": 5,
+    "parentId": 2,
+    "name": "რამაზი ზიბზიბაძე"
+  },
+  {
+    "id": 6,
+    "parentId": 2,
     "isFemale": true,
-    "name":"მარიამ ქავთარაძე",
+    "name": "მარინა ზიბზიბაძე"
+  },
+  {
+    "id": 7,
+    "parentId": 3,
+    "name": "საშა ზიბზიბაძე",
+    "rels": [
+      {
+        "name": "კარინა"
+      }
+    ]
+  },
+  {
+    "id": 8,
+    "parentId": 4,
+    "parentRelId": 1,
+    "name": "თემური ზიბზიბაძე"
+  },
+  {
+    "id": 9,
+    "parentId": 4,
+    "parentRelId": 1,
+    "isFemale": true,
+    "name": "ნანა ზიბზიბაძე",
+    "rels": [
+      {
+        "name": "სოსო ჩახვაშვილი"
+      }
+    ]
+  },
+  {
+    "id": 10,
+    "parentId": 4,
+    "parentRelId": 2,
+    "name": "ეზეკი ზიბზიბაძე",
+    "toptalUrl": "https://www.toptal.com/resume/ezeki-zibzibadze",
+    "imageUrl": "./images/people/ezeki-zibzibadze.jpg",
+    "rels": [
+      {
+        "name": "სალომე მინდიაშვილი"
+      }
+    ]
+  },
+  {
+    "id": 11,
+    "parentId": 4,
+    "parentRelId": 2,
+    "isFemale": true,
+    "name": "ელენე ზიბზიბაძე",
+    "imageUrl": "./images/people/ellen-zibzibadze.jpg"
+  },
+  {
+    "id": 12,
+    "parentId": 7,
+    "name": "ალექსანდრე ზიბზიბაძე"
+  },
+  {
+    "id": 13,
+    "parentId": 7,
+    "name": "შოთა ზიბზიბაძე"
+  },
+  {
+    "id": 14,
+    "parentId": 3,
+    "name": "სერიოჟა ზიბზიბაძე"
+  },
+  {
+    "id": 15,
+    "parentId": 9,
+    "name": "გიორგი ჩახვაშვილი"
+  },
+  {
+    "id": 100,
+    "parentId": 200,
+    "name": "კარპო ზიბზიბაძე",
+    "rels": [
+      {
+        "name": "თამარ ცერცვაძე"
+      }
+    ]
+  },
+  {
+    "id": 101,
+    "parentId": 100,
+    "name": "აბო ზიბზიბაძე",
+    "rels": [
+      {
+        "name": "ჟენია ჩერქეზია"
+      }
+    ]
+  },
+  {
+    "id": 102,
+    "parentId": 100,
+    "isFemale": true,
+    "name": "გოგუცა ზიბზიბაძე",
+    "rels": [
+      {
+        "name": "ილო მაისაშვილი"
+      }
+    ]
+  },
+  {
+    "id": 103,
+    "parentId": 100,
+    "name": "გრიშა ზიბზიბაძე",
+    "rels": [
+      {
+        "name": "ცავრინა შარიქაძე"
+      }
+    ]
+  },
+  {
+    "id": 104,
+    "parentId": 100,
+    "name": "სერიოჟა ზიბზიბაძე"
+  },
+  {
+    "id": 105,
+    "parentId": 100,
+    "name": "ავთანდილი ზიბზიბაძე"
+  },
+  {
+    "id": 106,
+    "parentId": 100,
+    "name": "ნათელა ზიბზიბაძე",
+    "isFemale": true,
+    "rels": [
+      {
+        "name": "გიორგი გაბისონია"
+      }
+    ]
+  },
+  {
+    "id": 107,
+    "parentId": 100,
+    "name": "ვარდენი (ჩიტო) ზიბზიბაძე",
+    "rels": [
+      {
+        "name": "მადლონა ალავიძე"
+      }
+    ]
+  },
+  {
+    "id": 108,
+    "parentId": 100,
+    "isFemale": true,
+    "name": "ციცო (მარგალიტა) ზიბზიბაძე"
+  },
+  {
+    "id": 109,
+    "parentId": 101,
+    "isFemale": true,
+    "name": "ლიანა ზიბზიბაძე",
+    "rels": [
+      {
+        "name": "გივი იობიძე"
+      }
+    ]
+  },
+  {
+    "id": 110,
+    "parentId": 101,
+    "isFemale": true,
+    "name": "ნაილი ზიბზიბაძე",
+    "rels": [
+      {
+        "name": "არჩილ ყუფარაძე"
+      }
+    ]
+  },
+  {
+    "id": 111,
+    "parentId": 101,
+    "name": "ვიტალი ზიბზიბაძე",
+    "rels": [
+      {
+        "name": "მზია ჯანაშია"
+      }
+    ]
+  },
+  {
+    "id": 112,
+    "parentId": 101,
+    "name": "სერგო ზიბზიბაძე",
+    "rels": [
+      {
+        "name": "ნინო სირბილაძე"
+      }
+    ]
+  },
+  {
+    "id": 113,
+    "parentId": 101,
+    "isFemale": true,
+    "name": "ნელი ზიბზიბაძე",
+    "rels": [
+      {
+        "name": "თენგიზ ყავლაშვილი"
+      }
+    ]
+  },
+  {
+    "id": 114,
+    "parentId": 102,
+    "isFemale": true,
+    "name": "ნელი"
+  },
+  {
+    "id": 115,
+    "parentId": 103,
+    "name": "დავით ზიბზიბაძე",
+    "rels": [
+      {
+        "name": "ირმა რუხაძე"
+      }
+    ]
+  },
+  {
+    "id": 116,
+    "parentId": 103,
+    "name": "ზურა ზიბზიბაძე",
+    "rels": [
+      {
+        "name": "ოლიკო ჯაფარიძე"
+      }
+    ]
+  },
+  {
+    "id": 117,
+    "parentId": 106,
+    "isFemale": true,
+    "name": "მარინა ზიბზიბაძე",
+    "rels": [
+      {
+        "name": "ილია ლაშხი"
+      }
+    ]
+  },
+  {
+    "id": 118,
+    "parentId": 107,
+    "name": "გიორგი ზიბზიბაძე",
+    "rels": [
+      {
+        "name": "ლიკა ტყემალაძე"
+      }
+    ]
+  },
+  {
+    "id": 119,
+    "parentId": 107,
+    "isFemale": true,
+    "name": "ლალი ზიბზიბაძე",
+    "rels": [
+      {
+        "name": "ნუგზარ ფერაძე"
+      }
+    ]
+  },
+  {
+    "id": 120,
+    "parentId": 109,
+    "isFemale": true,
+    "name": "ინგა"
+  },
+  {
+    "id": 121,
+    "parentId": 109,
+    "isFemale": true,
+    "name": "ლელა"
+  },
+  {
+    "id": 122,
+    "parentId": 110,
+    "isFemale": true,
+    "name": "ლომგული"
+  },
+  {
+    "id": 123,
+    "parentId": 110,
+    "isFemale": true,
+    "name": "წყნარისა"
+  },
+  {
+    "id": 124,
+    "parentId": 111,
+    "isFemale": true,
+    "name": "თამარ ზიბზიბაძე",
+    "rels": [
+      {
+        "name": "დავით ქორიძე"
+      }
+    ]
+  },
+  {
+    "id": 125,
+    "parentId": 111,
+    "isFemale": true,
+    "name": "თინათინ ზიბზიბაძე",
+    "rels": [
+      {
+        "name": "ბესო ხუხუა"
+      }
+    ]
+  },
+  {
+    "id": 126,
+    "parentId": 111,
+    "isFemale": true,
+    "name": "თეა ზიბზიბაძე"
+  },
+  {
+    "id": 127,
+    "parentId": 112,
+    "isFemale": true,
+    "name": "მელანო ზიბზიბაძე"
+  },
+  {
+    "id": 128,
+    "parentId": 112,
+    "isFemale": true,
+    "name": "სალომე ზიბზიბაძე"
+  },
+  {
+    "id": 129,
+    "parentId": 113,
+    "name": "ნიკა"
+  },
+  {
+    "id": 130,
+    "parentId": 113,
+    "name": "კახა"
+  },
+  {
+    "id": 131,
+    "parentId": 113,
+    "name": "ზვიადი"
+  },
+  {
+    "id": 132,
+    "parentId": 113,
+    "isFemale": true,
+    "name": "ნინი"
+  },
+  {
+    "id": 133,
+    "parentId": 115,
+    "name": "თამარ ზიბზიბაძე"
+  },
+  {
+    "id": 134,
+    "parentId": 115,
+    "name": "ნიკა ზიბზიბაძე"
+  },
+  {
+    "id": 135,
+    "parentId": 116,
+    "name": "კულა ზიბზიბაძე"
+  },
+  {
+    "id": 136,
+    "parentId": 116,
+    "name": "ლაზიკო ზიბზიბაძე"
+  },
+  {
+    "id": 137,
+    "parentId": 117,
+    "isFemale": true,
+    "name": "ანა"
+  },
+  {
+    "id": 138,
+    "parentId": 117,
+    "isFemale": true,
+    "name": "თამარი"
+  },
+  {
+    "id": 139,
+    "parentId": 117,
+    "name": "იოანე"
+  },
+  {
+    "id": 140,
+    "parentId": 118,
+    "name": "ლუკა ზიბზიბაძე"
+  },
+  {
+    "id": 141,
+    "parentId": 118,
+    "name": "ლაშა ზიბზიბაძე"
+  },
+  {
+    "id": 142,
+    "parentId": 119,
+    "name": "საბა ზიბზიბაძე"
+  },
+  {
+    "id": 143,
+    "parentId": 119,
+    "name": "თამარ ზიბზიბაძე"
+  },
+  {
+    "id": 144,
+    "parentId": 124,
+    "name": "სალომე"
+  },
+  {
+    "id": 145,
+    "parentId": 124,
+    "name": "რუსუდანი"
+  },
+  {
+    "id": 146,
+    "parentId": 125,
+    "name": "რუსუდანი"
+  },
+  {
+    "id": 400,
+    "parentId": 201,
+    "name": "სანდრო ზიბზიბაძე",
+    "rels": [
+      {
+        "name": ""
+      }
+    ]
+  },
+  {
+    "id": 401,
+    "parentId": 201,
+    "name": "ვანო ზიბზიბაძე",
+    "rels": [
+      {
+        "name": ""
+      }
+    ]
+  },
+  {
+    "id": 402,
+    "parentId": 201,
+    "name": "საშიკო ზიბზიბაძე",
+    "rels": [
+      {
+        "name": ""
+      }
+    ]
+  },
+  {
+    "id": 403,
+    "parentId": 201,
+    "name": "თამარ ზიბზიბაძე",
+    "isFemale": true,
+    "rels": [
+      {
+        "name": "ქავთარაძე (საჩხერიდან)"
+      }
+    ]
+  },
+  {
+    "id": 404,
+    "parentId": 201,
+    "isFemale": true,
+    "name": "გალინა ზიბზიბაძე"
+  },
+  {
+    "id": 405,
+    "parentId": 201,
+    "name": "ფაცია ზიბზიბაძე",
+    "isFemale": true,
+    "rels": [
+      {
+        "name": "ბოჭორიშვილი"
+      }
+    ]
+  },
+  {
+    "id": 406,
+    "parentId": 400,
+    "isFemale": true,
+    "name": "ჟუჟუნა ზიბზიბაძე",
+    "rels": [
+      {
+        "name": ""
+      }
+    ]
+  },
+  {
+    "id": 407,
+    "parentId": 400,
+    "name": "ბიჭიკო ზიბზიბაძე",
+    "rels": [
+      {
+        "name": ""
+      }
+    ]
+  },
+  {
+    "id": 408,
+    "parentId": 400,
+    "name": "ბაჩუნა ზიბზიბაძე"
+  },
+  {
+    "id": 409,
+    "parentId": 400,
+    "name": "ქაქალა ზიბზიბაძე"
+  },
+  {
+    "id": 410,
+    "parentId": 400,
+    "name": "ჟორა ზიბზიბაძე"
+  },
+  {
+    "id": 411,
+    "parentId": 401,
+    "isFemale": true,
+    "name": "ციალა ზიბზიბაძე"
+  },
+  {
+    "id": 412,
+    "parentId": 401,
+    "name": "ზურაბი ზიბზიბაძე"
+  },
+  {
+    "id": 413,
+    "parentId": 401,
+    "isFemale": true,
+    "name": "ნანული ზიბზიბაძე"
+  },
+  {
+    "id": 414,
+    "parentId": 402,
+    "name": "თამაზ ზიბზიბაძე",
+    "rels": [
+      {
+        "name": ""
+      }
+    ]
+  },
+  {
+    "id": 415,
+    "parentId": 414,
+    "name": "ჯაბა ზიბზიბაძე",
+    "rels": [
+      {
+        "name": ""
+      }
+    ]
+  },
+  {
+    "id": 416,
+    "parentId": 414,
+    "name": "ლაშა ზიბზიბაძე",
+    "rels": [
+      {
+        "name": ""
+      }
+    ]
+  },
+  {
+    "id": 417,
+    "parentId": 414,
+    "isFemale": true,
+    "name": "ინგა ზიბზიბაძე",
     "rels": [
       {
         "name": ""
       }
     ]
   }
-
-    
 ]
