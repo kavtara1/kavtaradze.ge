@@ -1,0 +1,481 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+  <title>Kavtaradze Family Tree</title>
+
+  <script src="./scripts/OrgChart.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/fetch/2.0.4/fetch.min.js"></script>
+  <link href="https://fonts.googleapis.com/css?family=Poppins:200&display=swap"
+        rel="stylesheet">
+
+  <!-- Force redirect to HTTPS -->
+  <script>
+    if (
+      !((window.location.host.indexOf("127.0.0.1") === 0) || (window.location.host.indexOf("localhost") === 0) || window.location.protocol === 'file:')
+      && (window.location.protocol != "https:")
+    ) {
+      window.location.protocol = "https:";
+    }
+  </script>
+
+  <!-- Styles -->
+  <style>
+    html,
+    body {
+      font-family: 'Poppins', sans-serif;
+      margin: 0;
+      padding: 0;
+      width: 100%;
+      height: 100%;
+      display: flex;
+      flex-direction: column;
+    }
+
+    section {
+      display: flex;
+      flex: 1;
+    }
+
+    section>span {
+      display: flex;
+      flex: 1;
+      align-items: center;
+      justify-content: center;
+    }
+
+    #tree {
+      flex: 1;
+      display: none;
+    }
+
+    section.loaded>span {
+      display: none;
+    }
+
+    section.loaded>#tree {
+
+      display: flex;
+    }
+
+    footer {
+      display: flex;
+      min-height: 30px;
+      border-top: 1px solid #f4f4f4;
+      align-items: center;
+      font-size: 14px;
+      color: gray;
+      font-weight: 200;
+      padding-left: 20px;
+    }
+
+    footer span {
+      margin-right: 20px;
+    }
+
+    footer span.fill {
+      flex: 1;
+    }
+
+    .pointer {
+      cursor: pointer;
+    }
+  </style>
+</head>
+
+<body>
+  <section id="mainSection">
+    <span>Loading...</span>
+    <div id="tree"></div>
+  </section>
+  <footer>
+    <span>
+      Idea By: Alexander Zibzibadze
+    </span>
+    <span class=fill></span>
+    <span>Zibzibadze Family Tree © 2019 </span>
+    <span class=fill></span>
+    <span>
+      Created By: Ezeki Zibzibadze
+    </span>
+  </footer>
+
+  <script>
+    window.onload = function () {
+
+      // Prepare templates
+      OrgChart.templates.family_template_1 = Object.assign({}, OrgChart.templates.ana);
+      OrgChart.templates.family_template_1.size = [200, 140];
+      OrgChart.templates.family_template_1.plus = '<circle cx="15" cy="-80" r="10" stroke-width="1" fill="white" stroke="silver"></circle><text style="font-size: 12px; cursor: pointer;" fill="#000000" x="15" y="-75" text-anchor="middle">+</text>';
+      OrgChart.templates.family_template_1.minus = '<circle cx="15" cy="-80" r="10" stroke-width="1" fill="white" stroke="silver"></circle><text style="font-size: 12px; cursor: pointer;" fill="#000000" x="16" y="-75" text-anchor="middle">-</text>';
+      OrgChart.templates.family_template_1.node = '';
+      OrgChart.templates.family_template_1.rippleRadius = 45;
+      OrgChart.templates.family_template_1.name_1 = '<text class="name_1" style="font-size: 12px;" fill="#000000" x="100" y="105" text-anchor="middle">{val}</text>';
+      OrgChart.templates.family_template_1.name_2 = '<text class="name_2" style="font-size: 12px;" fill="#000000" x="235" y="105" text-anchor="middle">{val}</text>';
+      OrgChart.templates.family_template_1.name_3 = '<text class="name_3" style="font-size: 12px;" fill="#000000" x="370" y="105" text-anchor="middle">{val}</text>';
+      OrgChart.templates.family_template_1.name_4 = '<text class="name_4" style="font-size: 12px;" fill="#000000" x="370" y="105" text-anchor="middle">{val}</text>';
+      OrgChart.templates.family_template_1.title_1 = '<text class="title_1" style="font-size: 12px;" fill="#aeaeae" x="100" y="120" text-anchor="middle">{val}</text>';
+      OrgChart.templates.family_template_1.title_2 = '<text class="title_2" style="font-size: 12px;" fill="#aeaeae" x="235" y="120" text-anchor="middle">{val}</text>';
+      OrgChart.templates.family_template_1.title_3 = '<text class="title_3" style="font-size: 12px;" fill="#aeaeae" x="370" y="120" text-anchor="middle">{val}</text>';
+      OrgChart.templates.family_template_1.title_4 = '<text class="title_4" style="font-size: 12px;" fill="#aeaeae" x="370" y="120" text-anchor="middle">{val}</text>';
+      OrgChart.templates.family_template_1.img_0 = '<clipPath id="{randId}"><circle cx="100" cy="45" r="40"></circle></clipPath><circle stroke-width="3" fill="none" stroke="#039BE5" cx="100" cy="45" r="45"></circle><image preserveAspectRatio="xMidYMid slice" clip-path="url(#{randId})" xlink:href="{val}" x="60" y="5"  width="80" height="80"></image>';
+      OrgChart.templates.family_template_1.badge_toptal = '<clipPath id="{randId}"><circle cx="132" cy="76" stroke-width="1" r="16"></circle></clipPath><circle stroke-width="1" fill="#cacaca" stroke="#cacaca" cx="132" cy="76" r="16"></circle><image preserveAspectRatio="xMidYMid slice" clip-path="url(#{randId})" xlink:href="./images/organizations/toptal.jpg" onClick="openPage(\'{val}\')" onTouchEnd="openPage(\'{val}\')" x="114" y="58" width="35" height="35" style="cursor: pointer;"></image>'
+      OrgChart.templates.family_template_1.badge_facebook = '<clipPath id="{randId}"><circle cx="132" cy="76" stroke-width="1" r="16"></circle></clipPath><circle stroke-width="1" fill="white" stroke="white" cx="132" cy="76" r="15"></circle><image preserveAspectRatio="xMidYMid slice" clip-path="url(#{randId})" xlink:href="./images/organizations/facebook.jpg" onClick="openPage(\'{val}\')" onTouchEnd="openPage(\'{val}\')" x="114" y="58" width="35" height="35" style="cursor: pointer;"></image>'
+
+      OrgChart.templates.family_template_1.linkAdjuster =
+        {
+          fromX: 0,
+          fromY: 0,
+          toX: 0,
+          toY: -95,
+        };
+
+      OrgChart.templates.family_template_2 = Object.assign({}, OrgChart.templates.family_template_1);
+      OrgChart.templates.family_template_2.size = [335, 140];
+      OrgChart.templates.family_template_2.node = '<line x1="145" x2="190" y1="45" y2="45" stroke-width="1" stroke="#000000"></line>';
+      OrgChart.templates.family_template_2.img_0 = '<clipPath id="{randId}"><circle cx="100" cy="45" r="40"></circle></clipPath><circle stroke-width="3" fill="none" stroke="#039BE5" cx="100" cy="45" r="45"></circle><image preserveAspectRatio="xMidYMid slice" clip-path="url(#{randId})" xlink:href="{val}" x="60" y="5"  width="80" height="80"></image>';
+      OrgChart.templates.family_template_2.img_1 = '<clipPath id="{randId}"><circle cx="235" cy="45" r="40"></circle></clipPath><circle stroke-width="3" fill="none" stroke="#aeaeae" cx="235" cy="45" r="45"></circle><image preserveAspectRatio="xMidYMid slice" clip-path="url(#{randId})" xlink:href="{val}" x="195" y="5"  width="80" height="80"></image>';
+      OrgChart.templates.family_template_2.linkAdjuster =
+        {
+          fromX: -65,
+          fromY: 0,
+          toX: 0,
+          toY: -95
+        };
+
+
+      OrgChart.templates.family_template_3 = Object.assign({}, OrgChart.templates.family_template_2);
+      OrgChart.templates.family_template_3.size = [470, 140];
+      OrgChart.templates.family_template_3.node = '<line x1="145" x2="190" y1="45" y2="45" stroke-width="1" stroke="#000000"></line><line x1="280" x2="325" y1="45" y2="45" stroke-width="1" stroke="#000000"></line>';
+      OrgChart.templates.family_template_3.img_0 = '<clipPath id="{randId}"><circle cx="100" cy="45" r="40"></circle></clipPath><circle stroke-width="3" fill="none" stroke="#aeaeae" cx="100" cy="45" r="45"></circle><image preserveAspectRatio="xMidYMid slice" clip-path="url(#{randId})" xlink:href="{val}" x="60" y="5"  width="80" height="80"></image>';
+      OrgChart.templates.family_template_3.img_1 = '<clipPath id="{randId}"><circle cx="235" cy="45" r="40"></circle></clipPath><circle stroke-width="3" fill="none" stroke="#039BE5" cx="235" cy="45" r="45"></circle><image preserveAspectRatio="xMidYMid slice" clip-path="url(#{randId})" xlink:href="{val}" x="195" y="5"  width="80" height="80"></image>';
+      OrgChart.templates.family_template_3.img_2 = '<clipPath id="{randId}"><circle cx="370" cy="45" r="40"></circle></clipPath><circle stroke-width="3" fill="none" stroke="#aeaeae" cx="370" cy="45" r="45"></circle><image preserveAspectRatio="xMidYMid slice" clip-path="url(#{randId})" xlink:href="{val}" x="330" y="5"  width="80" height="80"></image>';
+      OrgChart.templates.family_template_3.plus = '<circle cx="15" cy="-40" r="10" stroke-width="1" fill="white" stroke="silver"></circle><text style="font-size: 12px; cursor: pointer;" fill="#000000" x="15" y="-35" text-anchor="middle">+</text>';
+      OrgChart.templates.family_template_3.minus = '<circle cx="15" cy="-40" r="10" stroke-width="1" fill="white" stroke="silver"></circle><text style="font-size: 12px; cursor: pointer;" fill="#000000" x="16" y="-35" text-anchor="middle">-</text>';
+      OrgChart.templates.family_template_3.linkAdjuster =
+        {
+          fromX: 0,
+          fromY: 0,
+          toX: 0,
+          toY: -95
+        };
+
+
+      OrgChart.templates.family_template_4 = Object.assign({}, OrgChart.templates.family_template_3);
+      OrgChart.templates.family_template_4.size = [605, 140];
+      OrgChart.templates.family_template_4.node = '<line x1="145" x2="190" y1="45" y2="45" stroke-width="1" stroke="#000000"></line><line x1="280" x2="325" y1="45" y2="45" stroke-width="1" stroke="#000000"></line><line x1="415" x2="460" y1="45" y2="45" stroke-width="1" stroke="#000000"></line>';
+      OrgChart.templates.family_template_4.img_0 = '<clipPath id="{randId}"><circle cx="100" cy="45" r="40"></circle></clipPath><circle stroke-width="3" fill="none" stroke="#aeaeae" cx="100" cy="45" r="45"></circle><image preserveAspectRatio="xMidYMid slice" clip-path="url(#{randId})" xlink:href="{val}" x="60" y="5"  width="80" height="80"></image>';
+      OrgChart.templates.family_template_4.img_1 = '<clipPath id="{randId}"><circle cx="235" cy="45" r="40"></circle></clipPath><circle stroke-width="3" fill="none" stroke="#039BE5" cx="235" cy="45" r="45"></circle><image preserveAspectRatio="xMidYMid slice" clip-path="url(#{randId})" xlink:href="{val}" x="195" y="5"  width="80" height="80"></image>';
+      OrgChart.templates.family_template_4.img_2 = '<clipPath id="{randId}"><circle cx="370" cy="45" r="40"></circle></clipPath><circle stroke-width="3" fill="none" stroke="#aeaeae" cx="370" cy="45" r="45"></circle><image preserveAspectRatio="xMidYMid slice" clip-path="url(#{randId})" xlink:href="{val}" x="330" y="5"  width="80" height="80"></image>';
+      OrgChart.templates.family_template_4.img_3 = '<clipPath id="{randId}"><circle cx="505" cy="45" r="40"></circle></clipPath><circle stroke-width="3" fill="none" stroke="#aeaeae" cx="505" cy="45" r="45"></circle><image preserveAspectRatio="xMidYMid slice" clip-path="url(#{randId})" xlink:href="{val}" x="465" y="5"  width="80" height="80"></image>';
+      OrgChart.templates.family_template_4.linkAdjuster =
+        {
+          fromX: -65,
+          fromY: 0,
+          toX: 0,
+          toY: -95
+        };
+
+      const templates = [
+        'family_template_1',
+        'family_template_2',
+        'family_template_3',
+        'family_template_4',
+      ]
+
+
+      const mutipliedTemplates = templates.map(function (x) {
+
+        const to3_1 = x + '_to_3_1'
+        const to3_2 = x + '_to_3_2'
+        const to4_1 = x + '_to_4_1'
+        const to4_2 = x + '_to_4_2'
+        const to4_3 = x + '_to_4_3'
+        const to5_1 = x + '_to_5_1'
+        const to5_2 = x + '_to_5_2'
+        const to5_3 = x + '_to_5_3'
+        const to5_4 = x + '_to_5_4'
+
+        OrgChart.templates[to3_1] = Object.assign({}, OrgChart.templates[x]);
+        OrgChart.templates[to3_1].linkAdjuster = Object.assign(
+          {},
+          OrgChart.templates[x].linkAdjuster,
+          { toX: -65 }
+        )
+
+        OrgChart.templates[to3_2] = Object.assign({}, OrgChart.templates[x]);
+        OrgChart.templates[to3_2].linkAdjuster = Object.assign(
+          {},
+          OrgChart.templates[x].linkAdjuster,
+          { toX: 65 }
+        )
+
+        OrgChart.templates[to4_1] = Object.assign({}, OrgChart.templates[x]);
+        OrgChart.templates[to4_1].linkAdjuster = Object.assign(
+          {},
+          OrgChart.templates[x].linkAdjuster,
+          { toX: -135 }
+        )
+
+        OrgChart.templates[to4_2] = Object.assign({}, OrgChart.templates[x]);
+        OrgChart.templates[to4_2].linkAdjuster = Object.assign(
+          {},
+          OrgChart.templates[x].linkAdjuster,
+          { toX: 0 }
+        )
+
+        OrgChart.templates[to4_3] = Object.assign({}, OrgChart.templates[x]);
+        OrgChart.templates[to4_3].linkAdjuster = Object.assign(
+          {},
+          OrgChart.templates[x].linkAdjuster,
+          { toX: 135 }
+        )
+
+        OrgChart.templates[to5_1] = Object.assign({}, OrgChart.templates[x]);
+        OrgChart.templates[to5_1].linkAdjuster = Object.assign(
+          {},
+          OrgChart.templates[x].linkAdjuster,
+          { toX: -200 }
+        )
+
+        OrgChart.templates[to5_2] = Object.assign({}, OrgChart.templates[x]);
+        OrgChart.templates[to5_2].linkAdjuster = Object.assign(
+          {},
+          OrgChart.templates[x].linkAdjuster,
+          { toX: -65 }
+        )
+
+        OrgChart.templates[to5_3] = Object.assign({}, OrgChart.templates[x]);
+        OrgChart.templates[to5_3].linkAdjuster = Object.assign(
+          {},
+          OrgChart.templates[x].linkAdjuster,
+          { toX: 65 }
+        )
+
+        OrgChart.templates[to5_4] = Object.assign({}, OrgChart.templates[x]);
+        OrgChart.templates[to5_4].linkAdjuster = Object.assign(
+          {},
+          OrgChart.templates[x].linkAdjuster,
+          { toX: 200 }
+        )
+
+        return [
+          to3_1,
+          to3_2,
+          to4_1,
+          to4_2,
+          to4_3,
+        ]
+
+      }).reduce(concatArray, templates)
+
+      const tags = mutipliedTemplates.map(function (x) {
+        return { [x.toString()]: { template: x } }
+      }).reduce(function (a, b) { return Object.assign(a, b) })
+
+      const url = '/data.json'
+
+      fetch(url)
+        .then(function (x) { return x.json() })
+        .then(function (data) {
+
+          // data = []
+
+          document.getElementById('mainSection').className = "loaded"
+
+          const nodes = data
+            .map(function (x) { return mapTreeNode(x, data) })
+            .filter(function (x) { return !!x }) // ignore nulls (rels > 4)
+
+          console.log(nodes)
+          // Create chart
+          var chart = new OrgChart(document.getElementById("tree"), {
+            tags,
+            enableSearch: true,
+            searchFields: [
+              "name1"
+            ],
+            // nodeMouseClick: OrgChart.action.expandCollapse,
+            collapse: {
+              level: 3,
+              allChildren: true,
+              //   expand: {
+              //     nodes: [10]
+              //   }
+            },
+            nodeMouseClick: OrgChart.action.none,
+            mouseScrool: OrgChart.action.zoom,
+            nodeBinding: {
+              name_1: "name1",
+              name_2: "name2",
+              name_3: "name3",
+              name_4: "name4",
+              name_5: "name5",
+              title_1: "title1",
+              title_2: "title2",
+              title_3: "title3",
+              title_4: "title4",
+              title_5: "title5",
+              img_0: "img1",
+              img_1: "img2",
+              img_2: "img3",
+              img_3: "img4",
+              img_4: "img5",
+              badge_toptal: "toptal",
+              badge_facebook: "facebook",
+            },
+            nodes,
+          })
+        })
+        .catch(function (err) {
+          console.warn(err)
+          alert(' Problem loading data: ' + err.message)
+        })
+    }
+
+    function mapTreeNode(node, allNodes) {
+
+      // set variables
+      const parentId = node.parentId
+      const relId = node.parentRelId || 1
+      const hasRels = node.rels && node.rels.length
+      let parentLength
+
+      if (parentId) {
+        const parent = allNodes.find(function (x) { return x.id === parentId })
+        if (parent) {
+          parentLength = parent.rels
+            ? (parent.rels.length + 1)
+            : 1
+        }
+      }
+
+      const badge = {
+        toptal: node.toptalUrl || undefined,
+        facebook: node.facebookUrl || undefined,
+      }
+
+      // start analyze
+      if (!hasRels) {
+        const tag1 = 'family_template_1' + ((parentLength > 2)
+          ? '_to_' + parentLength + '_' + relId
+          : ''
+        )
+
+        return Object.assign(
+          {
+            id: node.id,
+            pid: parentId,
+            tags: [tag1],
+            name1: node.name,
+            img1: getImageUrl(node.imageUrl, node.isFemale),
+          },
+          badge,
+        )
+      }
+
+      if (node.rels.length > 4) {
+        console.error('Currently not supported relations more than 4')
+        return null
+      }
+
+
+      const tag = 'family_template_' + (node.rels.length + 1) +
+        ((parentLength > 2)
+          ? ('_to_' + parentLength + '_' + relId)
+          : ''
+        )
+
+      let people = {}
+
+      switch (node.rels.length) {
+        case 1:
+          people = {
+            name1: node.name,
+            img1: getImageUrl(node.imageUrl, node.isFemale),
+
+            name2: node.rels[0].name,
+            img2: getImageUrl(node.rels[0].imageUrl, !node.isFemale),
+          }
+          break
+
+        case 2:
+          people = {
+            name1: node.rels[0].name,
+            img1: getImageUrl(node.rels[0].imageUrl, !node.isFemale),
+
+            name2: node.name,
+            img2: getImageUrl(node.imageUrl, node.isFemale),
+
+            name3: node.rels[1].name,
+            img3: getImageUrl(node.rels[1].imageUrl, !node.isFemale),
+          }
+          break
+
+        case 3:
+          people = {
+            name1: node.rels[0].name,
+            img1: getImageUrl(node.rels[0].imageUrl, !node.isFemale),
+
+            name2: node.name,
+            img2: getImageUrl(node.imageUrl, node.isFemale),
+
+            name3: node.rels[1].name,
+            img3: getImageUrl(node.rels[1].imageUrl, !node.isFemale),
+
+            name4: node.rels[2].name,
+            img4: getImageUrl(node.rels[2].imageUrl, !node.isFemale),
+          }
+          break
+
+        case 4:
+          people = {
+            name1: node.rels[0].name,
+            img1: getImageUrl(node.rels[0].imageUrl, !node.isFemale),
+
+            name2: node.rels[1].name,
+            img2: getImageUrl(node.rels[1].imageUrl, !node.isFemale),
+
+            name3: node.name,
+            img3: getImageUrl(node.imageUrl, node.isFemale),
+
+            name4: node.rels[2].name,
+            img4: getImageUrl(node.rels[2].imageUrl, !node.isFemale),
+
+            name5: node.rels[3].name,
+            img5: getImageUrl(node.rels[3].imageUrl, !node.isFemale),
+          }
+          break
+      }
+
+
+      return Object.assign(
+        {
+          id: node.id,
+          pid: parentId,
+          tags: [tag],
+        },
+        people,
+        badge,
+      )
+    }
+
+    function concatArray(a, b) {
+      return a.concat(b)
+    }
+
+    function getImageUrl(imageUrl, isFemale) {
+      return imageUrl || (isFemale
+        ? './images/default/female.jpg'
+        : './images/default/male.gif'
+      )
+    }
+
+    function openPage(url) {
+      window.open(url)
+    }
+
+  </script>
+</body>
+
+</html>
