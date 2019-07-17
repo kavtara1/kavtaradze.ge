@@ -1,7 +1,7 @@
 # Family Tree
-Idea by: Alexander Zibzibadze
+Idea by: Nani kavtaradze
 
-Implemented by: Ezeki Zibzibadze
+Implemented by: Saba Kavtaradze
 
 
 ## Commits
